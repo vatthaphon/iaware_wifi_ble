@@ -100,12 +100,14 @@ static void sampling_data_callback(void* arg)
 
     uint16_t sample = sampling_input();
 
+    // printf("%d\n", sample);
+
     uint8_t high_sample = highbyte(sample);
     uint8_t low_sample  = lowbyte(sample);
 
     // Store the high byte of the sample.
     (run_buff_node_ptr->samples_buff)[4 + PACKET_HEADER_GROUP1_META_SIZE + (run_buff_node_ptr->i_samples)] = high_sample; // 4 bytes for the length of the data
-    (run_buff_node_ptr->samples_buff)[4 + PACKET_HEADER_GROUP1_META_SIZE + (run_buff_node_ptr->i_samples)] = low_sample;   
+    (run_buff_node_ptr->samples_buff)[4 + PACKET_HEADER_GROUP1_META_SIZE + (run_buff_node_ptr->i_samples + 1)] = low_sample;   
     run_buff_node_ptr->i_samples = run_buff_node_ptr->i_samples + 2;
 
     if (run_buff_node_ptr->i_samples == run_buff_node_ptr->n_samples)
@@ -152,5 +154,6 @@ static void sampling_data_callback(void* arg)
 
 static uint16_t sampling_input(void)
 {
+    // return 60000;
     return (uint16_t) iaware_analogRead();
 }
