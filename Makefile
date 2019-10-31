@@ -3,7 +3,7 @@
 # project subdirectory.
 #
 
-PROJECT_NAME := mytest5
+PROJECT_NAME := i-Aware
 
 include $(IDF_PATH)/make/project.mk
 
